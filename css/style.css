@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.list {
+  list-style: none;
+}
+
+/* Search bar */
+.search-bar {
+  margin-bottom: 25px;
+}
+
+/* Main content */
+.list li {
+  margin-bottom: 20px;
+}
+
+/* Movies */
+.movies-section {
+  padding: 20px;
+  margin-bottom: 25px;
+}

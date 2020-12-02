@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <title>Boolfix</title>
+</head>
+<body>
+
+  <div id="app">
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="Inserici un titolo..."
+             v-model="searchInput"
+             @keyup.enter="search">
+      <button @click="search">Cerca</button>
+    </div>
+
+    <!-- Main content -->
+    <main class="show-results">
+      <!-- Movies -->
+      <div class="movies-section" v-show="movies.length > 0">
+        <ul class="movies list">
+          <li class="movie" v-for="movie in movies">
+            <p>{{ movie.title }}</p>
+            <p>{{ movie.original_title }}</p>
+            <p>{{movie.original_language}}</p>
+            <div>{{ movie.vote_average }}</div>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
