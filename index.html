@@ -24,12 +24,42 @@
     <main class="show-results">
       <!-- Movies -->
       <div class="movies-section" v-show="movies.length > 0">
+        <h2>- Film -</h2>
         <ul class="movies list">
           <li class="movie" v-for="movie in movies">
             <p>{{ movie.title }}</p>
             <p>{{ movie.original_title }}</p>
-            <p>{{movie.original_language}}</p>
-            <div>{{ movie.vote_average }}</div>
+            <!-- così gestisco caso limite (da rivedere) -->
+            <span v-if="movie.original_language === 'it' || movie.original_language === 'en' ">
+              <img :src="`img/${movie.original_language}.svg`" alt="original language">
+            </span>
+            <span v-else>
+              {{movie.original_language}}
+            </span>
+            <div>
+              <i class="fas fa-star"
+                 v-for="n in starRating(movie.vote_average)"></i>
+              <i class="far fa-star"
+                 v-for="n in (5 - starRating(movie.vote_average))"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- Series -->
+      <div class="series-section" v-show="series.length > 0">
+        <h2>- Serie Tv -</h2>
+        <ul class="series list">
+          <li class="serie" v-for="serie in series">
+            <p>{{ serie.name }}</p>
+            <p>{{ serie.original_name }}</p>
+            <!-- così non gestisco caso limite ( da rivedere) -->
+            <img :src="'img/' + serie.original_language + '.svg' " alt="">
+            <div>
+              <i class="fas fa-star"
+                 v-for="n in starRating(serie.vote_average)"></i>
+              <i class="far fa-star"
+                 v-for="n in (5 - starRating(serie.vote_average))"></i>
+            </div>
           </li>
         </ul>
       </div>

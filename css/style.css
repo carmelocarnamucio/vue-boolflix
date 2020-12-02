@@ -8,6 +8,10 @@
   list-style: none;
 }
 
+.list img {
+  max-height: 3em;
+}
+
 /* Search bar */
 .search-bar {
   margin-bottom: 25px;
@@ -20,6 +24,12 @@
 
 /* Movies */
 .movies-section {
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+/*Series */
+.series-section {
   padding: 20px;
   margin-bottom: 25px;
 }
