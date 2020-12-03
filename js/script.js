@@ -9,6 +9,7 @@ var app = new Vue({
     search:function() {
       this.getMovies();
       this.getSeries();
+      this.searchInput = '';
     },
     getMovies: function() {
       axios.get('https://api.themoviedb.org/3/search/movie', {

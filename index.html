@@ -14,10 +14,11 @@
   <div id="app">
     <!-- Search bar -->
     <div class="search-bar">
-      <input type="text" placeholder="Inserici un titolo..."
+      <span class="logo">BOOLFIX</span>
+      <input type="text" placeholder="Inserici un titolo"
              v-model="searchInput"
              @keyup.enter="search">
-      <button @click="search">Cerca</button>
+
     </div>
 
     <!-- Main content -->
@@ -35,16 +36,25 @@
                   alt="copertina Film non trovata"
                   v-else>
             </div>
-            <p>{{ movie.title }}</p>
-            <p>{{ movie.original_title }}</p>
-            <div class="language">
-              <img :src="'img/' + movie.original_language + '.svg' " alt="">
-            </div>
-            <div>
+            <div class="vote">
+              <span class="description-title">Voto:</span>
               <i class="fas fa-star"
                  v-for="n in starRating(movie.vote_average)"></i>
               <i class="far fa-star"
                  v-for="n in (5 - starRating(movie.vote_average))"></i>
+            </div>
+
+            <div class="description">
+              <span class="description-title">Titolo:</span>
+              <p class="">{{ movie.title }}</p>
+              <span class="description-title">Titolo Originale:</span>
+              <p class="">{{ movie.original_title }}</p>
+              <div class="language">
+                <img :src="'img/' + movie.original_language + '.svg' " alt="">
+              </div>
+              <span class="description-overview"v-if="movie.overview === '' ">Descrizione non disponibile</span>
+              <p class="overflow description-title" v-else>{{movie.overview}}</p>
+
             </div>
           </li>
         </ul>
@@ -62,16 +72,24 @@
                    alt="copertina Serie Tv non trovata"
                    v-else>
             </div>
-            <p>{{ serie.name }}</p>
-            <p>{{ serie.original_name }}</p>
-            <div class="language">
-              <img :src="'img/' + serie.original_language + '.svg' " alt="">
-            </div>
-            <div>
+            <div class="vote">
+              <span class="description-title">Voto:</span>
               <i class="fas fa-star"
                  v-for="n in starRating(serie.vote_average)"></i>
               <i class="far fa-star"
                  v-for="n in (5 - starRating(serie.vote_average))"></i>
+            </div>
+
+            <div class="description">
+              <span class="description-title">Titolo:</span>
+              <p class="">{{ serie.name}}</p>
+              <span class="description-title">Titolo Originale:</span>
+              <p class="">{{ serie.original_name }}</p>
+              <div class="language">
+                <img :src="'img/' + serie.original_language + '.svg' " alt="">
+              </div>
+              <span v-if="serie.overview === '' ">Descrizione non disponibile</span>
+              <p class="overflow" v-else>{{serie.overview}}</p>
             </div>
           </li>
         </ul>
