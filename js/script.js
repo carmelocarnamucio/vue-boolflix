@@ -11,15 +11,30 @@ var app = new Vue({
       this.getSeries();
     },
     getMovies: function() {
-        axios.get("https://api.themoviedb.org/3/search/movie?api_key=7cef99d6f2b7da5c519fa01d79fc87e1&query=" + this.searchInput)
-          .then(result => this.movies = result.data.results )
+      axios.get('https://api.themoviedb.org/3/search/movie', {
+              params: {
+                api_key: '7cef99d6f2b7da5c519fa01d79fc87e1',
+                query: this.searchInput,
+                language: 'it-IT',
+              }
+    })
+        .then(result => this.movies = result.data.results )
     },
     getSeries: function() {
-        axios.get("https://api.themoviedb.org/3/search/tv?api_key=7cef99d6f2b7da5c519fa01d79fc87e1&query=" + this.searchInput)
-          .then(result => this.series = result.data.results )
+      axios.get('https://api.themoviedb.org/3/search/tv', {
+              params: {
+                api_key: '7cef99d6f2b7da5c519fa01d79fc87e1',
+                query: this.searchInput,
+                language: 'it-IT',
+              }
+    })
+        .then(result => this.series = result.data.results )
     },
     starRating: function(numRating) {
       return Math.ceil(numRating / 2);
+    },
+    setPosterPath: function(path) {
+      return `https://image.tmdb.org/t/p/w342/${path}`;
     }
   }
 });

@@ -27,15 +27,19 @@
         <h2>- Film -</h2>
         <ul class="movies list">
           <li class="movie" v-for="movie in movies">
+            <div class="poster">
+              <img :src="setPosterPath(movie.poster_path)"
+                  :alt="movie.title"
+                  v-if="movie.poster_path">
+              <img src="img/poster.png"
+                  alt="copertina Film non trovata"
+                  v-else>
+            </div>
             <p>{{ movie.title }}</p>
             <p>{{ movie.original_title }}</p>
-            <!-- così gestisco caso limite (da rivedere) -->
-            <span v-if="movie.original_language === 'it' || movie.original_language === 'en' ">
-              <img :src="`img/${movie.original_language}.svg`" alt="original language">
-            </span>
-            <span v-else>
-              {{movie.original_language}}
-            </span>
+            <div class="language">
+              <img :src="'img/' + movie.original_language + '.svg' " alt="">
+            </div>
             <div>
               <i class="fas fa-star"
                  v-for="n in starRating(movie.vote_average)"></i>
@@ -50,10 +54,19 @@
         <h2>- Serie Tv -</h2>
         <ul class="series list">
           <li class="serie" v-for="serie in series">
+            <div class="poster">
+              <img :src="setPosterPath(serie.poster_path)"
+                   :alt="serie.title"
+                   v-if="serie.poster_path">
+              <img src="img/poster.png"
+                   alt="copertina Serie Tv non trovata"
+                   v-else>
+            </div>
             <p>{{ serie.name }}</p>
             <p>{{ serie.original_name }}</p>
-            <!-- così non gestisco caso limite ( da rivedere) -->
-            <img :src="'img/' + serie.original_language + '.svg' " alt="">
+            <div class="language">
+              <img :src="'img/' + serie.original_language + '.svg' " alt="">
+            </div>
             <div>
               <i class="fas fa-star"
                  v-for="n in starRating(serie.vote_average)"></i>
