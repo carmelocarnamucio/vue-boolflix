@@ -13,18 +13,90 @@
 
   <div id="app">
     <!-- Search bar -->
-    <div class="search-bar">
-      <span class="logo">BOOLFIX</span>
-      <input type="text" placeholder="Inserici un titolo"
+    <header class="search-bar">
+      <a href="./index.html" class="logo">BOOLFIX</a>
+      <input class="search-input"type="text" placeholder="Cerca"
              v-model="searchInput"
              @keyup.enter="search">
-
-    </div>
-
-    <!-- Main content -->
+    </header>
+    <!-- Home Page -->
     <main class="show-results">
+      <div class=""  v-if="pagesearch === '0'">
+          <p class=""> Benvenuto nella tua Home Page. Non sai cosa guardare? Ecco qualche consiglio: </p>
+          <div class="movies-sectionHome">
+            <ul class="moviesHome list">
+              <li class="movieHome" v-for="movie in moviesHome1">
+                <div class="poster">
+                  <img :src="setPosterPath(movie.poster_path)"
+                      :alt="movie.title"
+                      v-if="movie.poster_path">
+                  <img src="img/poster.png"
+                      alt="copertina Film non trovata"
+                      v-else>
+                </div>
+                <div class="vote">
+                  <span class="description-title">Voto:</span>
+                  <i class="fas fa-star"
+                     v-for="n in starRating(movie.vote_average)"></i>
+                  <i class="far fa-star"
+                     v-for="n in (5 - starRating(movie.vote_average))"></i>
+                </div>
+
+                <div class="description">
+                  <span class="description-title">Titolo:</span>
+                  <p class="">{{ movie.title }}</p>
+                  <span class="description-title">Titolo Originale:</span>
+                  <p class="">{{ movie.original_title }}</p>
+                  <div class="language">
+                    <img :src="'img/' + movie.original_language + '.svg' " alt="">
+                  </div>
+                  <span class="description-overview"v-if="movie.overview === '' ">Descrizione non disponibile</span>
+                  <p class="overflow description-title" v-else>{{movie.overview}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <h2 class=""> signore degli anelli </h2>
+          <div class="movies-sectionHome">
+            <ul class="movies list">
+              <li class="movieHome" v-for="movie in moviesHome2">
+                <div class="poster">
+                  <img :src="setPosterPath(movie.poster_path)"
+                      :alt="movie.title"
+                      v-if="movie.poster_path">
+                  <img src="img/poster.png"
+                      alt="copertina Film non trovata"
+                      v-else>
+                </div>
+                <div class="vote">
+                  <span class="description-title">Voto:</span>
+                  <i class="fas fa-star"
+                     v-for="n in starRating(movie.vote_average)"></i>
+                  <i class="far fa-star"
+                     v-for="n in (5 - starRating(movie.vote_average))"></i>
+                </div>
+
+                <div class="descriptionHome">
+                  <span class="description-title">Titolo:</span>
+                  <p class="">{{ movie.title }}</p>
+                  <span class="description-title">Titolo Originale:</span>
+                  <p class="">{{ movie.original_title }}</p>
+                  <div class="language">
+                    <img :src="'img/' + movie.original_language + '.svg' " alt="">
+                  </div>
+                  <span class="description-overview"v-if="movie.overview === '' ">Descrizione non disponibile</span>
+                  <p class="overflow description-title" v-else>{{movie.overview}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+
       <!-- Movies -->
-      <div class="movies-section" v-show="movies.length > 0">
+      <div class="movies-section" v-if= "pagesearch != '0'">
         <h2>- Film -</h2>
         <ul class="movies list">
           <li class="movie" v-for="movie in movies">
@@ -60,7 +132,7 @@
         </ul>
       </div>
       <!-- Series -->
-      <div class="series-section" v-show="series.length > 0">
+      <div class="series-section" v-if= "pagesearch != '0'">
         <h2>- Serie Tv -</h2>
         <ul class="series list">
           <li class="serie" v-for="serie in series">

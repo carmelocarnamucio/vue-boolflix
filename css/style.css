@@ -10,6 +10,63 @@ body {
   color: black;
 }
 
+.search-input {
+  height: 30px;
+  width: 300px;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 15px;
+  color: #09203f;
+  background-color: #fff;
+  box-shadow: 0 0 1px #09203f;
+}
+
+/*Home Page*/
+
+.movieHome,
+.serieHome {
+  position: relative;
+  margin: 20px 20px;
+  padding: 20px;
+  width: 190px;
+  background-color: #00000070;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: .3s;
+  overflow: hidden;
+}
+
+.movies-sectionHome {
+  display: flex;
+  white-space: nowrap;
+  margin: 5px 0 25px 0;
+  width: 100%;
+  height: 400px;
+  overflow-x: auto;
+  flex: 0 0 auto;
+}
+
+.movieHome:hover,
+.serieHome:hover {
+  filter: drop-shadow(3px 3px 4px rgba(0,0,0,.6));
+  transform: scale(1.1);
+}
+
+.movieHome:hover .descriptionHome,
+.serieHome:hover .descriptionHome {
+  left: 0;
+}
+
+.moviesHome,
+.seriesHome {
+  display: flex;
+  justify-content: center;
+}
+
+.descriptionHome > p {
+  font-size: 13px;
+}
+
 .description > p {
   font-size: 15px;
 }
@@ -32,6 +89,7 @@ body {
   font-size: 35px;
   color: red;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .search-bar {
