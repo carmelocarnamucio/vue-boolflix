@@ -18,6 +18,23 @@ body {
   height: 100%;
 }
 
+.flex-c {
+  display: flex;
+  align-items: center;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
 /*Header*/
 
 .logo {
@@ -49,7 +66,7 @@ body {
   flex-basis: 75px;
   min-height: 75px;
   width: 100%;
-  background-color: #1a1a1a;
+  background-color: #141b24;
   z-index: 1;
 }
 
@@ -129,13 +146,18 @@ body {
   max-height: 1em;
 }
 
+.title {
+  font-size: 18px;
+  font-weight:lighter;mt15
+}
+
 /* MAIN CONTENT - show search results */
 
 main.show-results {
   flex-grow: 1;
   padding: 75px 0;
   overflow-y: auto;
-  background: linear-gradient(180deg, rgba(20, 27, 36, 0.9) 75%, rgba(51, 66, 79, 0.9) 100%);
+  background: linear-gradient(180deg, rgb(20, 27, 36) 100%, rgb(51, 66, 79) 100%);
 }
 
 .notfound {
@@ -148,6 +170,7 @@ main.show-results {
   color: #F00;
   padding: 40px;
 }
+
 .found {
   font-size: 20px;
   display: flex;
@@ -241,6 +264,11 @@ main.show-results {
 .description-title {
   font-weight: bold;
   font-size: 18px;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
 }
 
 .list {
@@ -252,7 +280,7 @@ main.show-results {
 }
 
 .list .language img {
-  max-height: 3em;
+  max-height: 2.6em;
 }
 
 .poster img {
@@ -287,22 +315,40 @@ h2 {
 
 .description-full-screen {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 70px;
-  width: 800px;
+  max-width: 1200px;
   min-height: 60vh;
   border-radius: 70px;
   box-shadow: 0 0 10px #f9f9f9;
-  background-color: #f9f9f9;
+  background-color: #1e1d1d;
 }
 
-.description-full-screen {
+.description-full-screen .img-wrapper {
   margin-right: 30px;
-  height: 80%;
+  height: 100%;
 }
 
-.description-full-screen img {
+.img-wrapper img {
   display: inline-block;
-  max-height: 30%;
+  max-height: 100%;
+}
+
+.description-wrapper {
+  align-self: flex-start;
+  font-size: 1.3rem;
+  overflow: auto;
+}
+
+.flex-c > img {
+  height: 30px;
+  margin-left: 10px;
+}
+
+.title-window {
+  font-weight: bold;
+}
+
+.text-overview {
+  font-size: 30px;
 }

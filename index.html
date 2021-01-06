@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
   <link rel="stylesheet" href="css/style.css">
@@ -19,9 +20,7 @@
              v-model="searchInput"
              @keyup.enter="search">
     </header>
-
     <main class="show-results">
-
       <!-- Home Page -->
       <!-- First block -->
       <div class=""  v-if="pagesearch === '0'">
@@ -29,7 +28,7 @@
         <h1 class="sectionHome"> {{queryHome1}} </h1>
         <div class="movies-sectionHome">
           <ul class="moviesHome list">
-            <li class="movieHome" v-for="movie in moviesHome1" @click="showOverlay">
+            <li class="movieHome" v-for="(movie, index) in moviesHome1" @click="details(index), movieGen(movie.id), movieCast(movie.id)">
               <div class="poster">
                 <img :src="setPosterPath(movie.poster_path)"
                      :alt="movie.title"
@@ -47,17 +46,10 @@
               </div>
               <div class="descriptionHome">
                 <span class="overflow description-title">Titolo:</span>
-                <p class="">{{ movie.title }}</p>
-                <span class="overflow description-title">Titolo Originale:</span>
-                <p class="">{{ movie.original_title }}</p>
-                <div class="languageHome">
-                  <span class="overflow description-title">Lingua:</span>
-                  <img :src="'img/' + movie.original_language + '.svg' " alt="">
-                </div>
-                <span class="description-overview"v-if="movie.overview === '' ">Descrizione non disponibile</span>
+                <p class="center">{{ movie.title }}</p>
+                <span class="description-overview"v-if="movie.overview === '' ">Trama non disponibile</span>
                 <p class="overflow description-title" v-else>{{movie.overview}}</p>
-                <div class="description" v-if="movie.overview">
-                </div>
+                <p class="mt15">clicca per avere maggiori dettagli</p>
               </div>
             </li>
           </ul>
@@ -68,7 +60,7 @@
         <h1 class="sectionHome"> {{queryHome2}} </h1>
         <div class="movies-sectionHome">
           <ul class="moviesHome list">
-            <li class="movieHome" v-for="movie in moviesHome2" @click="showOverlay">
+            <li class="movieHome" v-for="(movie, index) in moviesHome2" @click="details2(index), movieGen(movie.id), movieCast(movie.id)">
               <div class="poster">
                 <img :src="setPosterPath(movie.poster_path)"
                      :alt="movie.title"
@@ -86,15 +78,10 @@
               </div>
               <div class="descriptionHome">
                 <span class="overflow description-title">Titolo:</span>
-                <p class="">{{ movie.title }}</p>
-                <span class="overflow description-title">Titolo Originale:</span>
-                <p class="">{{ movie.original_title }}</p>
-                <div class="languageHome">
-                  <span class="overflow description-title">Lingua:</span>
-                  <img :src="'img/' + movie.original_language + '.svg' " alt="">
-                </div>
-                <span class="description-overview" v-if="movie.overview === '' ">Descrizione non disponibile</span>
+                <p class="center">{{ movie.title }}</p>
+                <span class="description-overview" v-if="movie.overview === '' ">Trama non disponibile</span>
                 <p class="overflow description-title" v-else>{{movie.overview}}</p>
+                <p class="mt15">clicca per avere maggiori dettagli</p>
               </div>
             </li>
           </ul>
@@ -111,7 +98,7 @@
           <h1>La ricerca non ha dato nessun risultato</h1>
         </div>
         <ul class="movies list">
-          <li class="movie" v-for="movie in movies" @click="showOverlay">
+          <li class="movie" v-for="(movie, index) in movies" @click="details(index), movieGen(movie.id), movieCast(movie.id)">
             <div class="poster">
               <img :src="setPosterPath(movie.poster_path)"
                   :alt="movie.title"
@@ -129,16 +116,10 @@
             </div>
             <div class="description">
               <span class="description-title">Titolo:</span>
-              <p class="">{{ movie.title }}</p>
-              <span class="description-title">Titolo Originale:</span>
-              <p class="">{{ movie.original_title }}</p>
-              <span class="description-title">Lingua:</span>
-              <div class="language">
-                <img :src="'img/' + movie.original_language + '.svg' " alt="">
-              </div>
+              <p class="center">{{ movie.title }}</p>
               <span class="description-overview"v-if="movie.overview === '' ">Trama non disponibile</span>
               <p class="overflow" v-else>{{movie.overview}}</p>
-
+              <p class="mt15">clicca per avere maggiori dettagli</p>
             </div>
           </li>
         </ul>
@@ -150,7 +131,7 @@
           <h1>La ricerca non ha dato nessun risultato</h1>
         </div>
         <ul class="series list">
-          <li class="serie" v-for="serie in series" @click="showOverlay">
+          <li class="serie" v-for="(serie, index) in series" @click="details2(index), serieGen(serie.id), serieCast(serie.id)">
             <div class="poster">
               <img :src="setPosterPath(serie.poster_path)"
                    :alt="serie.title"
@@ -168,31 +149,59 @@
             </div>
             <div class="description">
               <span class="description-title">Titolo:</span>
-              <p class="">{{ serie.name}}</p>
-              <span class="description-title">Titolo Originale:</span>
-              <p class="">{{ serie.original_name }}</p>
-              <div class="language">
-                <span class="description-title">Lingua:</span>
-                <img :src="'img/' + serie.original_language + '.svg' " alt="">
-              </div>
+              <p class="center">{{ serie.name}}</p>
               <span class="description-overview" v-if="serie.overview === '' ">Trama non disponibile</span>
               <p class="overflow" v-else>{{serie.overview}}</p>
+              <p class="mt15">clicca per avere maggiori dettagli</p>
             </div>
           </li>
         </ul>
       </div>
     </main>
-
     <!-- window containing a more accurate description -->
-    <div class="description-overlay" v-if="overlayStatus" @click="overlayStatus = false">
+    <div class="description-overlay" v-if="windowStatus" @click="windowStatus = false" >
       <div class="description-full-screen">
         <div class="img-wrapper">
-          <img :src="`https://image.tmdb.org/t/p/w342${overlay.poster_path}`"
-              alt=""
-              v-if="overlay.poster_path">
+          <img :src="setPosterPath(movieSelect.poster_path)"
+               :alt="movieSelect.title"
+               v-if="movieSelect.poster_path">
           <img src="img/poster.png"
-          alt="poster not found"
-          v-else>
+               alt="poster not found"
+               v-else>
+        </div>
+        <div class="description-wrapper">
+          <p class=" title-window center mb10">Trama </p>
+          <p class="overlay.overview mb10">
+            {{movieSelect.overview}}
+          </p>
+          <p class="description-overview"v-if="movieSelect.overview === '' "><span class="flex-c text-overview">Trama non disponibile</span></p>
+          <span class=" title-window mb10">Titolo: </span>
+          <span class="mb10"><em>{{ movieSelect.title }}</em></span>
+          <span class="mb10"><em>{{ movieSelect.name }}</em></span>
+          <br>
+          <span class=" title-window">Titolo Originale: </span>
+          <span><em>{{ movieSelect.original_title }}</em></span>
+          <span><em>{{ movieSelect.original_name }}</em></span>
+          <br>
+          <span class=" title-window">Genere: </span>
+          <span v-for="genres in moviesGenres"><em>{{ genres }} </em></span>
+          <br>
+          <span class=" title-window">Attori: </span>
+          <span v-for="cast in moviesCast"><em>{{ cast }} </em></span>
+          <br>
+          <span class=" title-window">Data di rilascio: </span>
+          <span v-for="gener in movieSelect.release_date"><em>{{ gener }}</em></span>
+          <span v-for="gener in movieSelect.first_air_date"><em>{{ gener }}</em></span>
+          <p class="flex-c mb10">
+            <span class="title-window center">Lingua originale:</span> <img :src="'img/' + movieSelect.original_language + '.svg' " alt="">
+          </p>
+          <p class="mb10">
+            <span class="title-window">Voto:</span>
+            <i class="fas fa-star"
+               v-for="n in starRating(movieSelect.vote_average)"></i>
+            <i class="far fa-star"
+               v-for="n in (5 - starRating(movieSelect.vote_average))"></i>
+          </p>
         </div>
       </div>
     </div>
